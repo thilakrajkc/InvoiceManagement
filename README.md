@@ -1,4 +1,4 @@
-Invoice Management Project Implementation Details:
+# Invoice Management Project Implementation Details:
 
 A RESTful Spring Boot application that provides invoice management. 
 Including invoice creation ,payments, and overdue handling.
@@ -13,18 +13,18 @@ Docker support to deploy with a single command.
 
 -----------------------------------------------
 
-Libraries Used:
+# Libraries Used:
 
-Spring Web
-Spring Data JPA
-H2 In-Memory Database
-Lombok – Reduce boilerplate
-SLF4J – Logging
+Spring Web, 
+Spring Data JPA, 
+H2 In-Memory Database, 
+Lombok – Reduce boilerplate, 
+SLF4J – Logging, 
 Docker + Docker Compose– Containerization
 
 ----------------------------------------------
 
-Run the project:
+# Run the project:
 
 Clone the repository
 git clone https://github.com/thilakrajkc/InvoiceManagement.git
@@ -46,10 +46,9 @@ http://localhost:8080
 
 ----------------------------------------------
 
-APIs:
+# APIs:
 
-
-# Create a new invoice.
+# Create new Invoice
 POST /invoices
 
 Request Body:
