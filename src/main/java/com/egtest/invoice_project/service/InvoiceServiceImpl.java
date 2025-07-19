@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -47,21 +48,21 @@ public class InvoiceServiceImpl implements InvoiceService {
         LocalDate newDueDate = today.plusDays(overdueDays);
 
         List<Invoice> overdueInvoices = repository.findAll().stream()
-                .filter(invoice ->
-                        invoice.getStatus() == InvoiceStatus.PENDING &&
-                                invoice.getDueDate().isBefore(today))
+                .filter(i -> i.isOverdue(today))
                 .toList();
 
         for (Invoice invoice : overdueInvoices) {
             double remaining = invoice.getRemainingAmount();
 
             if (invoice.getPaidAmount() > 0) {
+                // Partially paid
                 invoice.setStatus(InvoiceStatus.PAID);
                 repository.save(invoice);
 
                 Invoice newInvoice = new Invoice(remaining + lateFee, newDueDate);
                 repository.save(newInvoice);
             } else {
+                // Not paid at all
                 invoice.setStatus(InvoiceStatus.VOID);
                 repository.save(invoice);
 
@@ -70,4 +71,8 @@ public class InvoiceServiceImpl implements InvoiceService {
             }
         }
     }
+
+
+
+
 }
