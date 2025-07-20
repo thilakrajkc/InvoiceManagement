@@ -17,17 +17,21 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     private final InvoiceRepository repository;
 
+    //Create new Invoice
     @Override
     public Invoice createInvoice(double amount, LocalDate dueDate) {
         Invoice invoice = new Invoice(amount, dueDate);
         return repository.save(invoice);
     }
 
+    //Get All created invoice
     @Override
     public List<Invoice> getAllInvoices() {
         return repository.findAll();
     }
 
+
+    //Logic to pay the invoice
     @Override
     public void payInvoice(Long id, double amount) {
         Invoice invoice = repository.findById(id)
@@ -41,6 +45,8 @@ public class InvoiceServiceImpl implements InvoiceService {
 
         repository.save(invoice);
     }
+
+    //Handle overdue
 
     @Override
     public void processOverdue(double lateFee, int overdueDays) {
