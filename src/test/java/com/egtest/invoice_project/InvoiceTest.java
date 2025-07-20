@@ -35,6 +35,7 @@ class InvoiceTest {
         assertFalse(invoice.isOverdue(LocalDate.now()));
     }
 
+
     @Test
     void testIsOverdueFalseWhenNotPending() {
         Invoice invoice = new Invoice(100.0, LocalDate.now().minusDays(5));

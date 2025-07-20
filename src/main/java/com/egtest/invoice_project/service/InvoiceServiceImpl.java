@@ -57,6 +57,7 @@ public class InvoiceServiceImpl implements InvoiceService {
                 .filter(i -> i.isOverdue(today))
                 .toList();
 
+
         for (Invoice invoice : overdueInvoices) {
             double remaining = invoice.getRemainingAmount();
 
